@@ -1,0 +1,80 @@
+---
+import Layout from "@layouts/DefaultPage.astro";
+import { example } from "@modules/server";
+const title = "Example";
+const description = "Description";
+---
+
+<Layout {title} {description}>
+	<h1>{example}</h1>
+	<a href="/blog">blog</a>
+	--- // Test page to demonstrate script execution order ---
+
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<title>Script Execution Order Test</title>
+		</head>
+		<body>
+			<h1>Script Execution Order Test</h1>
+			<div id="log"></div>
+
+			<!-- Classic inline script - executes immediately -->
+			<script>
+				console.log("1. Classic script START - during parsing");
+				window.executionLog = ["1. Classic script executed during parsing"];
+
+				document.addEventListener("DOMContentLoaded", () => {
+					window.executionLog.push("4. DOMContentLoaded fired (parsing complete)");
+					console.log("4. DOMContentLoaded fired");
+					updateDisplay();
+				});
+
+				function updateDisplay() {
+					const logDiv = document.getElementById("log");
+					if (logDiv) {
+						logDiv.innerHTML = window.executionLog.map((msg) => `<p>${msg}</p>`).join("");
+					}
+				}
+
+				console.log("1. Classic script END");
+			</script>
+
+			<!-- Module script - deferred until after parsing -->
+			<script type="module">
+				console.log("3. Module script executed - after parsing complete");
+				window.executionLog.push("3. Module script executed (after parsing)");
+
+				// Prove that DOMContentLoaded may have already fired
+				if (document.readyState === "loading") {
+					console.log("3. Document still loading");
+				} else {
+					console.log("3. Document already parsed!");
+				}
+
+				// Module scripts run after parsing but potentially before DOMContentLoaded
+				updateDisplay();
+			</script>
+
+			<!-- Another classic script to show order -->
+			<script>
+				console.log("2. Second classic script - during parsing");
+				window.executionLog.push("2. Second classic script executed during parsing");
+			</script>
+
+			<p>Check the console and the display above to see execution order!</p>
+
+			<!-- Late module script -->
+			<script type="module">
+				console.log("5. Second module script");
+				window.executionLog.push("5. Second module script (also after parsing)");
+
+				// Final update
+				setTimeout(() => {
+					updateDisplay();
+					console.log("Final log:", window.executionLog);
+				}, 100);
+			</script>
+		</body>
+	</html>
+</Layout>

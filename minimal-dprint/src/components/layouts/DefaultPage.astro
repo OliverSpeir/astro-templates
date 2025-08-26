@@ -1,0 +1,20 @@
+---
+import "@assets/styles/reset.css";
+import BaseLayout from "@components/layouts/BaseLayout.astro";
+import Meta from "@components/layouts/utils/Meta.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title = "Default", description = "Default" } = Astro.props;
+const ogImagePublicPath = "";
+---
+
+<BaseLayout>
+  <Meta slot="meta" {title} {description} {ogImagePublicPath} />
+  <main>
+    <slot />
+  </main>
+</BaseLayout>

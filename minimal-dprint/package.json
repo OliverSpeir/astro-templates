@@ -1,0 +1,45 @@
+{
+  "name": "astro-minimal",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "astro": "astro",
+    "dev": "astro dev --host",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint --fix",
+    "format": "dprint fmt",
+    "lint:check": "eslint",
+    "format:check": "dprint check",
+    "dprint": "dprint"
+  },
+  "dependencies": {
+    "astro": "^5.12.0",
+    "astro-icon": "^1.1.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.4.1",
+    "@eslint/js": "^9.31.0",
+    "@types/eslint": "^9.6.1",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "dprint": "^0.50.1",
+    "eslint": "^9.31.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.1",
+    "globals": "^16.3.0",
+    "sharp": "^0.33.5",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.37.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "dprint"
+    ]
+  }
+}

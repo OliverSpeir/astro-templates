@@ -14,5 +14,11 @@ export default {
 				parser: "astro",
 			},
 		},
+		{
+			files: ["**/*.jsonc"],
+			options: {
+				trailingComma: "none",
+			},
+		},
 	],
 };

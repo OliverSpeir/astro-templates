@@ -1,19 +1,18 @@
 {
-  "typescript": {
-  },
-  "json": {
-  },
-  "markdown": {
-  },
-  "malva": {
-  },
+  "typescript": {},
+  "json": {},
+  "markdown": {},
+  "malva": {},
   "markup": {
     "scriptIndent": true,
     "styleIndent": true
   },
   "excludes": [
     "**/node_modules",
-    "**/*-lock.json"
+    "**/*-lock.json",
+    "**/.wrangler/",
+    "**/.astro/",
+    "**/.github/"
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.95.10.wasm",

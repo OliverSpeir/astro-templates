@@ -1,12 +1,12 @@
 ---
 import "@assets/styles/reset.css";
-import BaseLayout from "@components/layouts/BaseLayout.astro";
-import Meta from "@components/layouts/utils/Meta.astro";
+import BaseLayout from "./BaseLayout.astro";
+import Meta from "./components/Meta.astro";
 
-type Props = {
+interface Props {
   title?: string;
   description?: string;
-};
+}
 
 const { title = "Default", description = "Default" } = Astro.props;
 const ogImagePublicPath = "";

@@ -10,8 +10,10 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/components/layouts/*"],
       "@assets/*": ["src/assets/*"],
-      "@lib/*": ["src/lib/*"],
-      "@modules/*": ["src/lib/modules/*"]
+      "@icons/*": ["src/assets/icons/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@styles/*": ["src/assets/styles/*"],
+      "@modules/*": ["src/modules/*"]
     }
   },
   "exclude": ["dist/", "node_modules/", ".vscode", ".github"]

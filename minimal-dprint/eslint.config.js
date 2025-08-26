@@ -17,6 +17,7 @@ export default tseslint.config(
       "**/target",
       "**/.astro",
       "**/.github",
+      "**/.wrangler",
     ],
   },
   eslint.configs.recommended,
@@ -28,7 +29,7 @@ export default tseslint.config(
       parser: tsParser,
       parserOptions: {
         project: ["./tsconfig.json"],
-        tsconfigRootDir: ".",
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     plugins: {
@@ -47,8 +48,8 @@ export default tseslint.config(
       "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     },
   },
-  ...eslintPluginAstro.configs.recommended,
-  ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+  eslintPluginAstro.configs["flat/recommended"],
+  eslintPluginAstro.configs["flat/jsx-a11y-strict"],
   // Disabled because eslint-plugin-astro doesn't type Astro.props correctly in some contexts
   {
     files: ["**/*.astro"],
@@ -79,10 +80,12 @@ export default tseslint.config(
   },
   // Files that run in the browser and need the browser globals
   {
-    files: ["src/lib/modules/client/*"],
+    files: ["src/modules/client/*"],
     languageOptions: {
       globals: {
-        ...Object.fromEntries(Object.entries(globals.node).map(([key]) => [key, "off"])),
+        ...Object.fromEntries(
+          Object.entries(globals.node).map(([key]) => [key, "off"]),
+        ),
         ...globals.browser,
       },
     },

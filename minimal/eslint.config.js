@@ -27,8 +27,8 @@ export default tseslint.config(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ["./tsconfig.json"],
-				tsconfigRootDir: ".",
+				project: ["tsconfig.json"],
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		plugins: {
@@ -44,7 +44,7 @@ export default tseslint.config(
 					ignoreRestSiblings: true,
 				},
 			],
-			"@typescript-eslint/consistent-type-definitions": ["error", "type"],
+			"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
 		},
 	},
 
@@ -84,7 +84,7 @@ export default tseslint.config(
 
 	// Files that run in the browser and need the browser globals
 	{
-		files: ["src/lib/modules/client/*"],
+		files: ["src/modules/client/*"],
 		languageOptions: {
 			globals: {
 				...Object.fromEntries(Object.entries(globals.node).map(([key]) => [key, "off"])),

@@ -1,13 +1,14 @@
 // @ts-check
 import eslint from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 const typescriptEslint = tseslint.plugin;
 const tsParser = tseslint.parser;
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: [
       "**/node_modules",
@@ -75,7 +76,7 @@ export default tseslint.config(
   {
     files: ["src/env.d.ts"],
     rules: {
-      "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+      "@typescript-eslint/no-empty-object-type": "off",
     },
   },
   // Files that run in the browser and need the browser globals

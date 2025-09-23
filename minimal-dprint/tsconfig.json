@@ -4,16 +4,14 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
-    "baseUrl": ".",
-    "allowArbitraryExtensions": true,
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/components/layouts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@icons/*": ["src/assets/icons/*"],
-      "@images/*": ["src/assets/images/*"],
-      "@styles/*": ["src/assets/styles/*"],
-      "@modules/*": ["src/modules/*"]
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/components/layouts/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@icons/*": ["./src/assets/icons/*"],
+      "@images/*": ["./src/assets/images/*"],
+      "@styles/*": ["./src/assets/styles/*"],
+      "@modules/*": ["./src/modules/*"]
     }
   },
   "exclude": ["dist/", "node_modules/", ".vscode", ".github"]

@@ -2,12 +2,12 @@
 import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 
-type Props = {
+interface Props {
 	title: string;
 	description: string;
 	ogImage?: ImageMetadata | undefined;
 	post: CollectionEntry<"blog"> | undefined;
-};
+}
 
 const defaultOg = "/social-preview.png";
 const { title, description, ogImage, post } = Astro.props;
@@ -60,7 +60,6 @@ console.log(ogImage);
 		<meta property="og:image" content={new URL(post.data.ogImage.src, Astro.site).toString()} />
 	)
 }
-
 
 {
 	post && (

@@ -1,9 +1,9 @@
-import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-	site: "http://www.example.com",
+	site: "http://localhost:4321",
 	integrations: [
 		sitemap(),
 		icon({

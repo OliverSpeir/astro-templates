@@ -1,7 +1,7 @@
 ---
-type Props = {
+interface Props {
 	defaultTheme?: "auto" | "dark" | "light" | undefined;
-};
+}
 
 const { defaultTheme = "auto" } = Astro.props;
 ---
@@ -10,7 +10,6 @@ const { defaultTheme = "auto" } = Astro.props;
 ></script>
 
 <script>
-	console.log("ThemeManager loaded");
 	type Theme = "auto" | "dark" | "light";
 
 	const config = document.getElementById("theme-config");

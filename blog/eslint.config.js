@@ -1,13 +1,14 @@
 // @ts-check
 import eslint from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 const typescriptEslint = tseslint.plugin;
 const tsParser = tseslint.parser;
 
-export default tseslint.config(
+export default defineConfig(
 	{
 		ignores: [
 			"**/node_modules",
@@ -17,6 +18,7 @@ export default tseslint.config(
 			"**/target",
 			"**/.astro",
 			"**/.github",
+			"**/.wrangler",
 		],
 	},
 	eslint.configs.recommended,
@@ -28,7 +30,7 @@ export default tseslint.config(
 			parser: tsParser,
 			parserOptions: {
 				project: ["./tsconfig.json"],
-				tsconfigRootDir: ".",
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		plugins: {
@@ -44,12 +46,11 @@ export default tseslint.config(
 					ignoreRestSiblings: true,
 				},
 			],
-			"@typescript-eslint/consistent-type-definitions": ["error", "type"],
+			"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
 		},
 	},
-
-	...eslintPluginAstro.configs.recommended,
-
+	eslintPluginAstro.configs["flat/recommended"],
+	eslintPluginAstro.configs["flat/jsx-a11y-strict"],
 	// Disabled because eslint-plugin-astro doesn't type Astro.props correctly in some contexts
 	{
 		files: ["**/*.astro"],
@@ -61,7 +62,6 @@ export default tseslint.config(
 			"@typescript-eslint/no-unsafe-argument": "off",
 		},
 	},
-
 	// Disable typed rules for scripts inside Astro files
 	// https://github.com/ota-meshi/eslint-plugin-astro/issues/240
 	{
@@ -73,17 +73,15 @@ export default tseslint.config(
 		},
 		...tseslint.configs.disableTypeChecked,
 	},
-
 	{
 		files: ["src/env.d.ts"],
 		rules: {
-			"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+			"@typescript-eslint/no-empty-object-type": "off",
 		},
 	},
-
 	// Files that run in the browser and need the browser globals
 	{
-		files: ["src/lib/modules/client/*"],
+		files: ["src/modules/client/*"],
 		languageOptions: {
 			globals: {
 				...Object.fromEntries(Object.entries(globals.node).map(([key]) => [key, "off"])),
